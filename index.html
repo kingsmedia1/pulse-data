@@ -54,6 +54,16 @@
   .cd{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle;opacity:.55}
   .cchip.on .cd{opacity:1}
   td.cli .cd{opacity:1}
+  .av{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;
+    font-size:11px;font-weight:800;color:#0b1120;margin-right:11px;vertical-align:middle;letter-spacing:.02em}
+  td.cli{display:flex;align-items:center}
+  .lbmore button{width:100%;background:transparent;border:0;border-top:1px solid var(--line);
+    color:var(--mut);font-size:13px;font-weight:600;padding:14px;cursor:pointer;border-radius:0 0 12px 12px}
+  .lbmore button:hover{color:var(--ink);background:var(--bg2)}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable:hover{color:var(--ink)}
+  th.sortable.active{color:var(--ink)}
+  th .arrow{margin-left:4px;color:var(--brand2)}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
   .kpi{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);
     border-radius:16px;padding:16px 18px}
@@ -146,15 +156,16 @@
         <thead><tr><th class="rank">#</th><th>Client</th><th class="n" id="thMetric">Views</th><th class="n">Eng. Rate</th><th class="n">Followers</th><th class="n">Growth (7d)</th></tr></thead>
         <tbody id="lb"><tr><td colspan="6" style="color:var(--mut);padding:18px 12px">Loading latest numbers…</td></tr></tbody>
       </table>
+      <div class="lbmore" id="lbMore"></div>
     </div>
   </section>
 
   <section>
     <h2 class="stitle">Top Posts</h2>
-    <p class="snote">Top posts by views — click any post to open it on the platform.</p>
+    <p class="snote">Top posts by views · click a column header to sort (click again to reverse) · click a post to open it on the platform.</p>
     <div class="card">
       <table>
-        <thead><tr><th class="rank">#</th><th>Post</th><th class="n">Impr</th><th class="n">Engmt</th><th class="n">Likes</th><th class="n">Cmts</th><th class="n">Shares</th><th>Published</th></tr></thead>
+        <thead id="postHead"><tr><th class="rank">#</th><th>Post</th><th class="n sortable" data-key="impr">Impr<span class="arrow"></span></th><th class="n sortable" data-key="eng">Engmt<span class="arrow"></span></th><th class="n sortable" data-key="likes">Likes<span class="arrow"></span></th><th class="n sortable" data-key="comments">Cmts<span class="arrow"></span></th><th class="n sortable" data-key="shares">Shares<span class="arrow"></span></th><th class="sortable" data-key="date">Published<span class="arrow"></span></th></tr></thead>
         <tbody id="posts"></tbody>
       </table>
     </div>
@@ -166,8 +177,11 @@
 <script>
 const DATA_URLS = ["./data.json","https://raw.githubusercontent.com/kingsmedia1/pulse-data/main/data.json"];
 const PALETTE = ["#6ea8fe","#a78bfa","#f9a8d4","#4ade80","#fbbf24","#fb7185","#38bdf8","#818cf8","#f472b6","#34d399","#facc15","#60a5fa","#c084fc","#2dd4bf","#93c5fd","#fda4af"];
-const S = { win:"7", metric:"views", data:null, sel:new Set(), color:{} };
+const S = { win:"7", metric:"views", data:null, sel:new Set(), color:{}, lbExpanded:false, postSort:{key:"impr",dir:"desc"} };
 const colorFor = n => S.color[n] || "#a78bfa";
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtDate = s => { if(!s) return ""; const p=String(s).split("-"); return p.length===3 ? MON[(+p[1])-1]+" "+(+p[2]) : s; };
+const initials = n => (String(n).match(/[A-Za-z0-9]+/g)||[n]).slice(0,2).map(w=>w[0].toUpperCase()).join("");
 
 const fmt = n => { n=Number(n)||0; if(Math.abs(n)>=1e6)return (n/1e6).toFixed(1).replace(/\.0$/,'')+"M"; if(Math.abs(n)>=1e3)return (n/1e3).toFixed(1).replace(/\.0$/,'')+"K"; return n.toLocaleString(); };
 const full = n => (Number(n)||0).toLocaleString();
@@ -195,6 +209,12 @@ function wireControls(){
   document.querySelectorAll("#segMetric button").forEach(b=>b.onclick=()=>{ S.metric=b.dataset.m; setOn("#segMetric",b); render(); });
   document.getElementById("selAll").onclick=()=>{ S.sel=new Set(S.data.clients.map(c=>c.name)); document.querySelectorAll(".cchip").forEach(e=>e.classList.add("on")); render(); };
   document.getElementById("selNone").onclick=()=>{ S.sel.clear(); document.querySelectorAll(".cchip").forEach(e=>e.classList.remove("on")); render(); };
+  document.querySelectorAll("#postHead th.sortable").forEach(th=>th.onclick=()=>{
+    const k=th.dataset.key;
+    if(S.postSort.key===k) S.postSort.dir = S.postSort.dir==="desc"?"asc":"desc";
+    else S.postSort={key:k, dir:"desc"};
+    render();
+  });
 }
 function setOn(sel,btn){ document.querySelectorAll(sel+" button").forEach(x=>x.classList.remove("on")); btn.classList.add("on"); }
 
@@ -235,20 +255,30 @@ function render(){
     return `<div class="bar"><div class="nm">${esc(c.name)}</div><div class="track"><div class="fill" style="width:${w}%;background:linear-gradient(90deg,${col},${col}bb)"></div></div><div class="val">${disp}</div></div>`;
   }).join("") || `<div style="color:var(--mut);padding:16px">No clients selected.</div>`;
 
-  // leaderboard
+  // leaderboard (top 3 by default, expandable)
   document.getElementById("thMetric").textContent=metricName();
-  document.getElementById("lb").innerHTML = sorted.map((c,i)=>{
+  const shown = S.lbExpanded ? sorted : sorted.slice(0,3);
+  document.getElementById("lb").innerHTML = shown.map((c,i)=>{
     const v=win7?c.v7:c.v30, e=win7?c.e7:c.e30;
     const primary = S.metric==="rate"? rate(e,v).toFixed(2)+"%" : S.metric==="eng"? full(e) : full(v);
     const g=c.growth||0;
-    return `<tr><td class="rank">${i+1}</td><td class="cli"><span class="cd" style="background:${colorFor(c.name)}"></span>${esc(c.name)}</td><td class="n">${primary}</td><td class="n">${rate(e,v).toFixed(2)}%</td><td class="n">${full(c.foll)}</td><td class="n ${g>=0?'up':'dn'}">${g>=0?'+':''}${full(g)}</td></tr>`;
+    return `<tr><td class="rank">${i+1}</td><td class="cli"><span class="av" style="background:${colorFor(c.name)}">${initials(c.name)}</span>${esc(c.name)}</td><td class="n">${primary}</td><td class="n">${rate(e,v).toFixed(2)}%</td><td class="n">${full(c.foll)}</td><td class="n ${g>=0?'up':'dn'}">${g>=0?'▲ ':'▼ '}${full(Math.abs(g))}</td></tr>`;
   }).join("") || `<tr><td colspan="6" style="color:var(--mut);padding:16px">No clients selected.</td></tr>`;
+  const extra = sorted.length - 3, more = document.getElementById("lbMore");
+  if(extra > 0){ more.innerHTML = `<button>${S.lbExpanded ? "Show fewer ▲" : ("Show "+extra+" more client"+(extra>1?"s":"")+" ▼")}</button>`; more.firstChild.onclick=()=>{ S.lbExpanded=!S.lbExpanded; render(); }; }
+  else more.innerHTML = "";
 
-  // posts
+  // posts — top 40 by views, re-sortable by any column
   const sel=S.sel;
-  const posts=(S.data.posts||[]).filter(p=>sel.has(p.client)).sort((a,b)=>b.impr-a.impr).slice(0,40);
+  let posts=(S.data.posts||[]).filter(p=>sel.has(p.client)).sort((a,b)=>b.impr-a.impr).slice(0,40);
+  const sk=S.postSort.key, sdir=S.postSort.dir==="asc"?1:-1;
+  posts.sort((a,b)=>{ let va,vb; if(sk==="date"){ va=a.date||""; vb=b.date||""; } else { va=Number(a[sk])||0; vb=Number(b[sk])||0; } return va<vb?-1*sdir : va>vb?1*sdir : 0; });
+  document.querySelectorAll("#postHead th.sortable").forEach(th=>{
+    const on = th.dataset.key===S.postSort.key; th.classList.toggle("active",on);
+    th.querySelector(".arrow").textContent = on ? (S.postSort.dir==="desc"?"↓":"↑") : "";
+  });
   document.getElementById("posts").innerHTML = posts.map((p,i)=>{
-    return `<tr><td class="rank">${i+1}</td><td><a class="post" href="${escAttr(p.url)}" target="_blank" rel="noopener"><span class="postt"><span class="net">${esc(p.net)}</span>${esc(p.title||"(post)")}</span></a><div style="color:var(--mut2);font-size:11px;margin-top:2px">${esc(p.client)}</div></td><td class="n">${full(p.impr)}</td><td class="n">${full(p.eng)}</td><td class="n">${full(p.likes)}</td><td class="n">${full(p.comments)}</td><td class="n">${full(p.shares)}</td><td style="color:var(--mut)">${esc(p.date)}</td></tr>`;
+    return `<tr><td class="rank">${i+1}</td><td><a class="post" href="${escAttr(p.url)}" target="_blank" rel="noopener"><span class="postt">${esc(p.title||"(post)")}</span></a><div style="color:var(--mut2);font-size:11px;margin-top:3px"><span class="net">${esc(p.net)}</span>${esc(p.client)}</div></td><td class="n">${full(p.impr)}</td><td class="n">${full(p.eng)}</td><td class="n">${full(p.likes)}</td><td class="n">${full(p.comments)}</td><td class="n">${full(p.shares)}</td><td style="color:var(--mut)">${esc(fmtDate(p.date))}</td></tr>`;
   }).join("") || `<tr><td colspan="8" style="color:var(--mut);padding:16px">No posts for the selected clients.</td></tr>`;
 
   const win = (m.windows&&m.windows[S.win])||"";
