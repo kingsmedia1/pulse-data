@@ -51,6 +51,9 @@
   .cchip{font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);
     background:var(--bg2);color:var(--mut);cursor:pointer;user-select:none}
   .cchip.on{background:var(--chip);border-color:var(--brand);color:var(--ink)}
+  .cd{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle;opacity:.55}
+  .cchip.on .cd{opacity:1}
+  td.cli .cd{opacity:1}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
   .kpi{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);
     border-radius:16px;padding:16px 18px}
@@ -162,7 +165,9 @@
 
 <script>
 const DATA_URLS = ["./data.json","https://raw.githubusercontent.com/kingsmedia1/pulse-data/main/data.json"];
-const S = { win:"7", metric:"views", data:null, sel:new Set() };
+const PALETTE = ["#6ea8fe","#a78bfa","#f9a8d4","#4ade80","#fbbf24","#fb7185","#38bdf8","#818cf8","#f472b6","#34d399","#facc15","#60a5fa","#c084fc","#2dd4bf","#93c5fd","#fda4af"];
+const S = { win:"7", metric:"views", data:null, sel:new Set(), color:{} };
+const colorFor = n => S.color[n] || "#a78bfa";
 
 const fmt = n => { n=Number(n)||0; if(Math.abs(n)>=1e6)return (n/1e6).toFixed(1).replace(/\.0$/,'')+"M"; if(Math.abs(n)>=1e3)return (n/1e3).toFixed(1).replace(/\.0$/,'')+"K"; return n.toLocaleString(); };
 const full = n => (Number(n)||0).toLocaleString();
@@ -173,14 +178,14 @@ async function load(){
     try{ const r=await fetch(u,{cache:"no-store"}); if(r.ok){ S.data=await r.json(); break; } }catch(e){}
   }
   if(!S.data){ document.getElementById("lb").innerHTML='<tr><td colspan="6"><div class="err">Could not load data.json.</div></td></tr>'; return; }
-  S.data.clients.forEach(c=>S.sel.add(c.name));
+  S.data.clients.forEach((c,i)=>{ S.sel.add(c.name); S.color[c.name]=PALETTE[i%PALETTE.length]; });
   buildChips(); wireControls(); render();
 }
 
 function buildChips(){
   const box=document.getElementById("clientChips"); box.innerHTML="";
   S.data.clients.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(c=>{
-    const el=document.createElement("span"); el.className="cchip on"; el.textContent=c.name;
+    const el=document.createElement("span"); el.className="cchip on"; el.innerHTML=`<span class="cd" style="background:${colorFor(c.name)}"></span>${esc(c.name)}`;
     el.onclick=()=>{ el.classList.toggle("on"); if(S.sel.has(c.name))S.sel.delete(c.name); else S.sel.add(c.name); render(); };
     el.dataset.name=c.name; box.appendChild(el);
   });
@@ -225,9 +230,9 @@ function render(){
   const max = Math.max(1,...sorted.map(metricVal));
   const isRate = S.metric==="rate";
   document.getElementById("chart").innerHTML = sorted.map(c=>{
-    const val=metricVal(c); const w=(100*val/max).toFixed(1);
+    const val=metricVal(c); const w=(100*val/max).toFixed(1); const col=colorFor(c.name);
     const disp = isRate? val.toFixed(2)+"%" : full(Math.round(val));
-    return `<div class="bar"><div class="nm">${esc(c.name)}</div><div class="track"><div class="fill" style="width:${w}%"></div></div><div class="val">${disp}</div></div>`;
+    return `<div class="bar"><div class="nm">${esc(c.name)}</div><div class="track"><div class="fill" style="width:${w}%;background:linear-gradient(90deg,${col},${col}bb)"></div></div><div class="val">${disp}</div></div>`;
   }).join("") || `<div style="color:var(--mut);padding:16px">No clients selected.</div>`;
 
   // leaderboard
@@ -236,7 +241,7 @@ function render(){
     const v=win7?c.v7:c.v30, e=win7?c.e7:c.e30;
     const primary = S.metric==="rate"? rate(e,v).toFixed(2)+"%" : S.metric==="eng"? full(e) : full(v);
     const g=c.growth||0;
-    return `<tr><td class="rank">${i+1}</td><td class="cli">${esc(c.name)}</td><td class="n">${primary}</td><td class="n">${rate(e,v).toFixed(2)}%</td><td class="n">${full(c.foll)}</td><td class="n ${g>=0?'up':'dn'}">${g>=0?'+':''}${full(g)}</td></tr>`;
+    return `<tr><td class="rank">${i+1}</td><td class="cli"><span class="cd" style="background:${colorFor(c.name)}"></span>${esc(c.name)}</td><td class="n">${primary}</td><td class="n">${rate(e,v).toFixed(2)}%</td><td class="n">${full(c.foll)}</td><td class="n ${g>=0?'up':'dn'}">${g>=0?'+':''}${full(g)}</td></tr>`;
   }).join("") || `<tr><td colspan="6" style="color:var(--mut);padding:16px">No clients selected.</td></tr>`;
 
   // posts
