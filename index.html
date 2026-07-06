@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Daily Client Pulse — Kings Media</title>
+<title>The Daily Client Pulse ‚Äî Kings Media</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
 <link rel="icon" href="./favicon.ico" sizes="any" />
@@ -11,15 +11,15 @@
 <meta name="theme-color" content="#070b16" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Kings Media" />
-<meta property="og:title" content="The Daily Client Pulse — Kings Media" />
-<meta property="og:description" content="Live client performance across every social platform, refreshed daily — views, engagement, follower growth, and top posts." />
+<meta property="og:title" content="The Daily Client Pulse ‚Äî Kings Media" />
+<meta property="og:description" content="Live client performance across every social platform, refreshed daily ‚Äî views, engagement, follower growth, and top posts." />
 <meta property="og:url" content="https://kingsmedia1.github.io/pulse-data/" />
 <meta property="og:image" content="https://kingsmedia1.github.io/pulse-data/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="The Daily Client Pulse — Kings Media" />
+<meta property="og:image:alt" content="The Daily Client Pulse ‚Äî Kings Media" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="The Daily Client Pulse — Kings Media" />
+<meta name="twitter:title" content="The Daily Client Pulse ‚Äî Kings Media" />
 <meta name="twitter:description" content="Live client performance across every social platform, refreshed daily." />
 <meta name="twitter:image" content="https://kingsmedia1.github.io/pulse-data/og.png" />
 <style>
@@ -109,6 +109,45 @@
   footer{margin-top:34px;color:var(--mut2);font-size:12px;text-align:center;line-height:1.7}
   .err{background:#2a1420;border:1px solid #5b2233;color:#ffd7de;padding:12px 14px;border-radius:12px}
   @media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}.bar .nm{width:120px;min-width:120px}.postt{max-width:230px}}
+
+  /* ‚îÄ‚îÄ KPI Goals ‚îÄ‚îÄ */
+  .gsum{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .gchip{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid}
+  .gchip .gd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .gchip-green{border-color:rgba(52,211,153,.35);color:var(--good);background:rgba(52,211,153,.07)}
+  .gchip-green .gd{background:var(--good)}
+  .gchip-red{border-color:rgba(251,113,133,.3);color:var(--bad);background:rgba(251,113,133,.06)}
+  .gchip-red .gd{background:var(--bad)}
+  .gchip-mut{border-color:var(--line);color:var(--mut)}
+  .gchip-mut .gd{background:var(--mut)}
+  .grow{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}
+  .grow:last-child{border-bottom:0}
+  .grow-left{display:flex;align-items:center;gap:10px;width:180px;min-width:180px}
+  .grow-name{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .grow-kpis{flex:1;display:flex;flex-direction:column;gap:9px}
+  .gkpi{display:flex;align-items:center;gap:10px}
+  .gkpi-lbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut2);width:82px;flex-shrink:0}
+  .gkpi-track{flex:1;background:var(--bg2);border-radius:8px;height:14px;position:relative;overflow:visible}
+  .gkpi-fill{height:100%;border-radius:8px;max-width:100%;min-width:0;transition:width .5s}
+  .gkpi-pace{position:absolute;top:-4px;bottom:-4px;left:43.3%;width:1.5px;background:rgba(255,255,255,.18);border-radius:1px}
+  .gkpi-nums{width:150px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums;flex-shrink:0;color:var(--mut)}
+  .gkpi-nums b{color:var(--ink)}
+  .gkpi-pct{width:46px;text-align:right;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;flex-shrink:0}
+  .gstatus{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 9px;border-radius:999px;white-space:nowrap;align-self:center}
+  .gstatus-green{background:rgba(52,211,153,.15);color:var(--good)}
+  .gstatus-red{background:rgba(251,113,133,.12);color:var(--bad)}
+  .gstatus-mut{background:rgba(95,112,150,.15);color:var(--mut)}
+  .gnote{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:14px;display:flex;flex-direction:column;gap:8px}
+  .gnote-row{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--mut);line-height:1.6}
+  .gnote-row strong{color:var(--ink)}
+  .gnote-icon{flex-shrink:0;margin-top:1px;opacity:.65}
+  .gpace-strip{display:flex;align-items:center;gap:14px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 16px;margin-bottom:16px}
+  .gpace-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut2);white-space:nowrap;width:100px}
+  .gpace-bar{flex:1;height:5px;background:var(--bg2);border-radius:3px;overflow:hidden}
+  .gpace-fill{height:100%;width:43.3%;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:3px}
+  .gpace-stats{display:flex;gap:16px;white-space:nowrap;font-size:12px;color:var(--mut)}
+  .gpace-stats b{color:var(--ink)}
+  @media(max-width:820px){.grow-left{width:120px;min-width:120px}.gkpi-nums{width:100px}}
 </style>
 </head>
 <body>
@@ -117,14 +156,14 @@
     <div class="logo">K</div>
     <div class="brand">KINGS MEDIA<b>Client Performance Intelligence</b></div>
     <div class="pills">
-      <span class="pill live"><span class="dot"></span> Live · <b id="pUpdated">—</b></span>
-      <span class="pill">Window · <b id="pWindow">Last 7 Days</b></span>
-      <span class="pill">Source · <b>Vista Social</b></span>
+      <span class="pill live"><span class="dot"></span> Live ¬∑ <b id="pUpdated">‚Äî</b></span>
+      <span class="pill">Window ¬∑ <b id="pWindow">Last 7 Days</b></span>
+      <span class="pill">Source ¬∑ <b>Vista Social</b></span>
     </div>
   </header>
 
   <h1>The Daily Client Pulse</h1>
-  <p class="sub">A live, beautified view of Vista Social. Slice by time range, metric, and client — everything updates instantly. “Views” reflects total impressions across all platforms.</p>
+  <p class="sub">A live, beautified view of Vista Social. Slice by time range, metric, and client ‚Äî everything updates instantly. "Views" reflects total impressions across all platforms.</p>
 
   <div class="controls">
     <div class="cgroup">
@@ -149,10 +188,10 @@
   </div>
 
   <div class="kpis">
-    <div class="kpi"><div class="k">Total Views</div><div class="v" id="kViews">—</div><div class="d" id="kViewsD">—</div></div>
-    <div class="kpi"><div class="k">Avg / Client</div><div class="v" id="kAvg">—</div><div class="d">selected clients</div></div>
-    <div class="kpi"><div class="k">Engagement</div><div class="v" id="kEng">—</div><div class="d" id="kEngD">—</div></div>
-    <div class="kpi"><div class="k">Follower Growth</div><div class="v" id="kGrow">—</div><div class="d">trailing 7-day net</div></div>
+    <div class="kpi"><div class="k">Total Views</div><div class="v" id="kViews">‚Äî</div><div class="d" id="kViewsD">‚Äî</div></div>
+    <div class="kpi"><div class="k">Avg / Client</div><div class="v" id="kAvg">‚Äî</div><div class="d">selected clients</div></div>
+    <div class="kpi"><div class="k">Engagement</div><div class="v" id="kEng">‚Äî</div><div class="d" id="kEngD">‚Äî</div></div>
+    <div class="kpi"><div class="k">Follower Growth</div><div class="v" id="kGrow">‚Äî</div><div class="d">trailing 7-day net</div></div>
   </div>
 
   <section>
@@ -167,15 +206,31 @@
     <div class="card">
       <table>
         <thead><tr><th class="rank">#</th><th>Client</th><th class="n" id="thMetric">Views</th><th class="n">Eng. Rate</th><th class="n">Followers</th><th class="n">Growth (7d)</th></tr></thead>
-        <tbody id="lb"><tr><td colspan="6" style="color:var(--mut);padding:18px 12px">Loading latest numbers…</td></tr></tbody>
+        <tbody id="lb"><tr><td colspan="6" style="color:var(--mut);padding:18px 12px">Loading latest numbers‚Ä¶</td></tr></tbody>
       </table>
       <div class="lbmore" id="lbMore"></div>
     </div>
   </section>
 
+  <section id="kpiGoalsSection">
+    <h2 class="stitle">30-Day KPI Goals <span style="font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0;margin-left:8px">Jun 22 ‚Äì Jul 22, 2026</span></h2>
+    <p class="snote">Team sprint goals tracked against live Vista Social data. The faint line on each bar marks the 43% pace threshold ‚Äî where the fill should reach today to stay on track.</p>
+    <div class="gpace-strip">
+      <span class="gpace-lbl">Period Progress</span>
+      <div class="gpace-bar"><div class="gpace-fill"></div></div>
+      <div class="gpace-stats"><span>Day <b>13</b> of 30</span><span><b>17</b> days remaining</span><span>On-pace target: <b>43%+</b> of goal</span></div>
+    </div>
+    <div class="gsum" id="kpiGoalSum"></div>
+    <div class="card" id="kpiGoalCard"></div>
+    <div class="gnote">
+      <div class="gnote-row"><svg class="gnote-icon" width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="6" stroke="#fbbf24"/><rect x="6" y="5" width="1" height="5" fill="#fbbf24"/><rect x="6" y="3" width="1" height="1.2" fill="#fbbf24"/></svg><span><strong>YouTube data unavailable this period:</strong> Vista Social returned null impressions for most YouTube profiles ‚Äî actual totals are higher. Affected: Mardy Cobb, Pirtle Farms, Jerremy Newsome, Scott Donnell, Vince Pitstick, Michael Rutkowski, Remy Davenport.</span></div>
+      <div class="gnote-row"><svg class="gnote-icon" width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="6" stroke="#5f7096"/><rect x="6" y="5" width="1" height="5" fill="#5f7096"/><rect x="6" y="3" width="1" height="1.2" fill="#5f7096"/></svg><span><strong>Jerremy Newsome</strong> is YouTube + Facebook only; neither returned data this period.</span></div>
+    </div>
+  </section>
+
   <section>
     <h2 class="stitle">Top Posts</h2>
-    <p class="snote">Top posts by views · click a column header to sort (click again to reverse) · click a post to open it on the platform.</p>
+    <p class="snote">Top posts by views ¬∑ click a column header to sort (click again to reverse) ¬∑ click a post to open it on the platform.</p>
     <div class="card">
       <table>
         <thead id="postHead"><tr><th class="rank">#</th><th>Post</th><th class="n sortable" data-key="impr">Impr<span class="arrow"></span></th><th class="n sortable" data-key="eng">Engmt<span class="arrow"></span></th><th class="n sortable" data-key="likes">Likes<span class="arrow"></span></th><th class="n sortable" data-key="comments">Cmts<span class="arrow"></span></th><th class="n sortable" data-key="shares">Shares<span class="arrow"></span></th><th class="sortable" data-key="date">Published<span class="arrow"></span></th></tr></thead>
@@ -184,7 +239,7 @@
     </div>
   </section>
 
-  <footer id="foot">Source · Vista Social · Auto-refreshed every morning · “Views” = impressions across all connected platforms<br>Built for Kings Media · Internal use</footer>
+  <footer id="foot">Source ¬∑ Vista Social ¬∑ Auto-refreshed every morning ¬∑ "Views" = impressions across all connected platforms<br>Built for Kings Media ¬∑ Internal use</footer>
 </div>
 
 <script>
@@ -206,7 +261,7 @@ async function load(){
   }
   if(!S.data){ document.getElementById("lb").innerHTML='<tr><td colspan="6"><div class="err">Could not load data.json.</div></td></tr>'; return; }
   S.data.clients.forEach((c,i)=>{ S.sel.add(c.name); S.color[c.name]=PALETTE[i%PALETTE.length]; });
-  buildChips(); wireControls(); render();
+  buildChips(); wireControls(); buildKpiGoals(); render();
 }
 
 function buildChips(){
@@ -242,7 +297,7 @@ const metricName = ()=> S.metric==="views"?"Views":S.metric==="eng"?"Engagement"
 function render(){
   if(!S.data)return;
   const m=S.data.meta||{};
-  document.getElementById("pUpdated").textContent = m.updated||"—";
+  document.getElementById("pUpdated").textContent = m.updated||"‚Äî";
   const rows = S.data.clients.filter(c=>S.sel.has(c.name));
   const win7 = S.win==="7";
 
@@ -275,30 +330,114 @@ function render(){
     const v=win7?c.v7:c.v30, e=win7?c.e7:c.e30;
     const primary = S.metric==="rate"? rate(e,v).toFixed(2)+"%" : S.metric==="eng"? full(e) : full(v);
     const g=c.growth||0;
-    return `<tr><td class="rank">${i+1}</td><td class="cli"><span class="av" style="background:${colorFor(c.name)}">${initials(c.name)}</span>${esc(c.name)}</td><td class="n">${primary}</td><td class="n">${rate(e,v).toFixed(2)}%</td><td class="n">${full(c.foll)}</td><td class="n ${g>=0?'up':'dn'}">${g>=0?'▲ ':'▼ '}${full(Math.abs(g))}</td></tr>`;
+    return `<tr><td class="rank">${i+1}</td><td class="cli"><span class="av" style="background:${colorFor(c.name)}">${initials(c.name)}</span>${esc(c.name)}</td><td class="n">${primary}</td><td class="n">${rate(e,v).toFixed(2)}%</td><td class="n">${full(c.foll)}</td><td class="n ${g>=0?'up':'dn'}">${g>=0?'‚ñ≤ ':'‚ñº '}${full(Math.abs(g))}</td></tr>`;
   }).join("") || `<tr><td colspan="6" style="color:var(--mut);padding:16px">No clients selected.</td></tr>`;
   const extra = sorted.length - 3, more = document.getElementById("lbMore");
-  if(extra > 0){ more.innerHTML = `<button>${S.lbExpanded ? "Show fewer ▲" : ("Show "+extra+" more client"+(extra>1?"s":"")+" ▼")}</button>`; more.firstChild.onclick=()=>{ S.lbExpanded=!S.lbExpanded; render(); }; }
+  if(extra > 0){ more.innerHTML = `<button>${S.lbExpanded ? "Show fewer ‚ñ≤" : ("Show "+extra+" more client"+(extra>1?"s":"")+" ‚ñº")}</button>`; more.firstChild.onclick=()=>{ S.lbExpanded=!S.lbExpanded; render(); }; }
   else more.innerHTML = "";
 
-  // posts — top 40 by views, re-sortable by any column
+  // posts ‚Äî top 40 by views, re-sortable by any column
   const sel=S.sel;
   let posts=(S.data.posts||[]).filter(p=>sel.has(p.client)).sort((a,b)=>b.impr-a.impr).slice(0,40);
   const sk=S.postSort.key, sdir=S.postSort.dir==="asc"?1:-1;
   posts.sort((a,b)=>{ let va,vb; if(sk==="date"){ va=a.date||""; vb=b.date||""; } else { va=Number(a[sk])||0; vb=Number(b[sk])||0; } return va<vb?-1*sdir : va>vb?1*sdir : 0; });
   document.querySelectorAll("#postHead th.sortable").forEach(th=>{
     const on = th.dataset.key===S.postSort.key; th.classList.toggle("active",on);
-    th.querySelector(".arrow").textContent = on ? (S.postSort.dir==="desc"?"↓":"↑") : "";
+    th.querySelector(".arrow").textContent = on ? (S.postSort.dir==="desc"?"‚Üì":"‚Üë") : "";
   });
   document.getElementById("posts").innerHTML = posts.map((p,i)=>{
     return `<tr><td class="rank">${i+1}</td><td><a class="post" href="${escAttr(p.url)}" target="_blank" rel="noopener"><span class="postt">${esc(p.title||"(post)")}</span></a><div style="color:var(--mut2);font-size:11px;margin-top:3px"><span class="net">${esc(p.net)}</span>${esc(p.client)}</div></td><td class="n">${full(p.impr)}</td><td class="n">${full(p.eng)}</td><td class="n">${full(p.likes)}</td><td class="n">${full(p.comments)}</td><td class="n">${full(p.shares)}</td><td style="color:var(--mut)">${esc(fmtDate(p.date))}</td></tr>`;
   }).join("") || `<tr><td colspan="8" style="color:var(--mut);padding:16px">No posts for the selected clients.</td></tr>`;
 
   const win = (m.windows&&m.windows[S.win])||"";
-  document.getElementById("foot").innerHTML = `Source · Vista Social · ${win} · ${S.data.clients.length} clients · “Views” = impressions across all connected platforms<br>Built for Kings Media · Internal use`;
+  document.getElementById("foot").innerHTML = `Source ¬∑ Vista Social ¬∑ ${win} ¬∑ ${S.data.clients.length} clients ¬∑ "Views" = impressions across all connected platforms<br>Built for Kings Media ¬∑ Internal use`;
 }
 function esc(s){ return String(s==null?"":s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
 function escAttr(s){ return String(s==null?"":s).replace(/"/g,"&quot;"); }
+
+// ‚îÄ‚îÄ KPI Goals ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+const KPI_PACE = 13/30;
+const KPI_GOALS = [
+  { name:"Chad Campbell",    kpis:[{lbl:"Views",        goal:8e6,   curr:167293,   src:"YT + IG"}] },
+  { name:"Chad Staples",     kpis:[{lbl:"Views",        goal:10e6,  curr:639339,   src:"YT + TT + IG"}] },
+  { name:"Gary Cucchi",      kpis:[{lbl:"Views",        goal:5e6,   curr:615086,   src:"YT + TT + IG"}] },
+  { name:"Jerremy Newsome",  kpis:[{lbl:"Views",        goal:1e6,   curr:null,     src:"No data"}] },
+  { name:"John Corcorran",   kpis:[{lbl:"Views",        goal:7e6,   curr:110293,   src:"YT + IG"}] },
+  { name:"Mardy Cobb",       kpis:[{lbl:"Views",        goal:5e6,   curr:484094,   src:"IG (YT missing)"}] },
+  { name:"Pirtle Farms",     kpis:[{lbl:"Views",        goal:10e6,  curr:726949,   src:"TT + IG (YT missing)"}] },
+  { name:"Remy Davenport",   kpis:[{lbl:"Views",        goal:20e6,  curr:24549922, src:"TT + IG"}] },
+  { name:"Michael Rutkowski",kpis:[
+    {lbl:"Views",            goal:6e6,   curr:246608,  src:"IG + TT (YT missing)"},
+    {lbl:"IG Followers",     goal:3000,  curr:623,     src:"Current total"},
+    {lbl:"TT Followers",     goal:3000,  curr:218,     src:"Current total"}
+  ]},
+  { name:"Scott Donnell",    kpis:[{lbl:"Views",        goal:25e6,  curr:2338974,  src:"TT + IG (YT missing)"}] },
+  { name:"Vince Pitstick",   kpis:[
+    {lbl:"Views",            goal:10e6,  curr:937853,  src:"TT + IG (YT missing)"},
+    {lbl:"New Followers",    goal:28000, curr:6363,    src:"IG + TT gained"}
+  ]},
+  { name:"Zach Schoose",     kpis:[{lbl:"Views",        goal:25e6,  curr:2278320,  src:"IG only"}] }
+];
+
+function fmtG(n){
+  if(n===null)return "‚Äî";
+  if(Math.abs(n)>=1e9)return (n/1e9).toFixed(1)+"B";
+  if(Math.abs(n)>=1e6)return (n/1e6).toFixed(2).replace(/\.?0+$/,"")+"M";
+  if(Math.abs(n)>=1e3)return (n/1e3).toFixed(1).replace(/\.0$/,"")+"K";
+  return n.toLocaleString();
+}
+function kpiSt(kpi){
+  if(kpi.curr===null)return "nodata";
+  const p=kpi.curr/kpi.goal;
+  return p>=1?"exceeded":p>=KPI_PACE?"onpace":p>=KPI_PACE*.6?"close":"behind";
+}
+function clientSt(kpis){
+  if(kpis.every(k=>k.curr===null))return "nodata";
+  return kpis.filter(k=>k.curr!==null).every(k=>k.curr>=k.goal)?"exceeded":"behind";
+}
+
+function buildKpiGoals(){
+  const exceeded=KPI_GOALS.filter(c=>clientSt(c.kpis)==="exceeded").length;
+  const behind=KPI_GOALS.filter(c=>clientSt(c.kpis)==="behind").length;
+  const nodata=KPI_GOALS.filter(c=>clientSt(c.kpis)==="nodata").length;
+  document.getElementById("kpiGoalSum").innerHTML=
+    `<span class="gchip gchip-green"><span class="gd"></span>${exceeded} Exceeded Goal</span>`+
+    `<span class="gchip gchip-red"><span class="gd"></span>${behind} Behind Pace</span>`+
+    `<span class="gchip gchip-mut"><span class="gd"></span>${nodata} No Data</span>`;
+
+  document.getElementById("kpiGoalCard").innerHTML=KPI_GOALS.map(c=>{
+    const cs=clientSt(c.kpis);
+    const pillCls=cs==="exceeded"?"gstatus gstatus-green":cs==="nodata"?"gstatus gstatus-mut":"gstatus gstatus-red";
+    const pillLbl=cs==="exceeded"?"Goal Exceeded":cs==="nodata"?"No Data":"Behind Pace";
+    const col=colorFor(c.name);
+    const kpisHtml=c.kpis.map(kpi=>{
+      const st=kpiSt(kpi);
+      const pct=kpi.curr!==null?Math.min(kpi.curr/kpi.goal*100,100):0;
+      const rawPct=kpi.curr!==null?kpi.curr/kpi.goal*100:null;
+      const pctLbl=rawPct!==null?(rawPct>100?rawPct.toFixed(0):rawPct.toFixed(1))+"%":"‚Äî";
+      const fillColor=st==="exceeded"?"var(--good)":st==="close"?"#f59e0b":`linear-gradient(90deg,${col},${col}bb)`;
+      const pctColor=st==="exceeded"?"var(--good)":st==="close"?"#f59e0b":st==="nodata"?"var(--mut2)":"var(--mut)";
+      return `<div class="gkpi">
+        <span class="gkpi-lbl">${esc(kpi.lbl)}</span>
+        <div class="gkpi-track">
+          <div class="gkpi-fill" style="width:${pct}%;background:${fillColor}"></div>
+          ${kpi.curr!==null?'<div class="gkpi-pace"></div>':""}
+        </div>
+        <span class="gkpi-nums"><b>${fmtG(kpi.curr)}</b> / ${fmtG(kpi.goal)} <span style="font-size:10px;color:var(--mut2)">${esc(kpi.src)}</span></span>
+        <span class="gkpi-pct" style="color:${pctColor}">${pctLbl}</span>
+      </div>`;
+    }).join("");
+    return `<div class="grow">
+      <div class="grow-left">
+        <span class="av" style="background:${col}">${initials(c.name)}</span>
+        <span class="grow-name">${esc(c.name)}</span>
+      </div>
+      <div class="grow-kpis">${kpisHtml}</div>
+      <span class="${pillCls}" style="margin-left:12px">${pillLbl}</span>
+    </div>`;
+  }).join("");
+}
+
 load();
 </script>
 </body>
