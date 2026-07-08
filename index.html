@@ -405,7 +405,12 @@ function buildKpiGoals(){
     `<span class="gchip gchip-red"><span class="gd"></span>${behind} Behind Pace</span>`+
     `<span class="gchip gchip-mut"><span class="gd"></span>${nodata} No Data</span>`;
 
-  document.getElementById("kpiGoalCard").innerHTML=KPI_GOALS.map(c=>{
+  const kpiSorted=[...KPI_GOALS].sort((a,b)=>{
+    const ap=(a.kpis[0].curr??-1)/a.kpis[0].goal;
+    const bp=(b.kpis[0].curr??-1)/b.kpis[0].goal;
+    return bp-ap;
+  });
+  document.getElementById("kpiGoalCard").innerHTML=kpiSorted.map(c=>{
     const cs=clientSt(c.kpis);
     const pillCls=cs==="exceeded"?"gstatus gstatus-green":cs==="nodata"?"gstatus gstatus-mut":"gstatus gstatus-red";
     const pillLbl=cs==="exceeded"?"Goal Exceeded":cs==="nodata"?"No Data":"Behind Pace";
