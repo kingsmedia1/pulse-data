@@ -218,7 +218,7 @@
     <div class="gpace-strip">
       <span class="gpace-lbl">Period Progress</span>
       <div class="gpace-bar"><div class="gpace-fill"></div></div>
-      <div class="gpace-stats"><span>Day <b>13</b> of 30</span><span><b>17</b> days remaining</span><span>On-pace target: <b>43%+</b> of goal</span></div>
+      <div class="gpace-stats"><span>Day <b>17</b> of 30</span><span><b>13</b> days remaining</span><span>On-pace target: <b>43%+</b> of goal</span></div>
     </div>
     <div class="gsum" id="kpiGoalSum"></div>
     <div class="card" id="kpiGoalCard"></div>
@@ -356,27 +356,27 @@ function esc(s){ return String(s==null?"":s).replace(/[&<>]/g,c=>({"&":"&amp;","
 function escAttr(s){ return String(s==null?"":s).replace(/"/g,"&quot;"); }
 
 // ── KPI Goals ──────────────────────────────────────────────────────────────
-const KPI_PACE = 15/30;
+const KPI_PACE = 17/30;
 const KPI_GOALS = [
-  { name:"Chad Campbell",    kpis:[{lbl:"Views",        goal:8e6,   curr:195947,   src:"YT + IG"}] },
-  { name:"Chad Staples",     kpis:[{lbl:"Views",        goal:10e6,  curr:3534488,   src:"YT + TT + IG"}] },
-  { name:"Gary Cucchi",      kpis:[{lbl:"Views",        goal:5e6,   curr:684890,   src:"YT + TT + IG"}] },
-  { name:"Jerremy Newsome",  kpis:[{lbl:"Views",        goal:1e6,   curr:18862,    src:"YT only"}] },
-  { name:"John Corcorran",   kpis:[{lbl:"Views",        goal:7e6,   curr:127491,   src:"YT + IG"}] },
-  { name:"Mardy Cobb",       kpis:[{lbl:"Views",        goal:5e6,   curr:534674,   src:"IG (YT missing)"}] },
-  { name:"Pirtle Farms",     kpis:[{lbl:"Views",        goal:10e6,  curr:872156,   src:"TT + IG (YT missing)"}] },
-  { name:"Remy Davenport",   kpis:[{lbl:"Views",        goal:20e6,  curr:26877020, src:"TT + IG"}] },
+  { name:"Chad Campbell",    kpis:[{lbl:"Views",        goal:8e6,   curr:295222,    src:"All platforms"}] },
+  { name:"Chad Staples",     kpis:[{lbl:"Views",        goal:10e6,  curr:4492410,   src:"All platforms"}] },
+  { name:"Gary Cucchi",      kpis:[{lbl:"Views",        goal:5e6,   curr:726585,    src:"All platforms"}] },
+  { name:"Jerremy Newsome",  kpis:[{lbl:"Views",        goal:1e6,   curr:2315509,   src:"All platforms"}] },
+  { name:"John Corcorran",   kpis:[{lbl:"Views",        goal:7e6,   curr:219070,    src:"All platforms"}] },
+  { name:"Mardy Cobb",       kpis:[{lbl:"Views",        goal:5e6,   curr:591993,    src:"All platforms"}] },
+  { name:"Pirtle Farms",     kpis:[{lbl:"Views",        goal:10e6,  curr:1575672,   src:"All platforms"}] },
+  { name:"Remy Davenport",   kpis:[{lbl:"Views",        goal:20e6,  curr:29793786,  src:"All platforms"}] },
   { name:"Michael Rutkowski",kpis:[
-    {lbl:"Views",            goal:6e6,   curr:257942,  src:"IG + TT (YT missing)"},
-    {lbl:"IG Followers",     goal:3000,  curr:625,     src:"Current total"},
-    {lbl:"TT Followers",     goal:3000,  curr:221,     src:"Current total"}
+    {lbl:"Views",            goal:6e6,   curr:467214,   src:"All platforms"},
+    {lbl:"IG Followers",     goal:3000,  curr:625,      src:"Current total"},
+    {lbl:"TT Followers",     goal:3000,  curr:224,      src:"Current total"}
   ]},
-  { name:"Scott Donnell",    kpis:[{lbl:"Views",        goal:25e6,  curr:2698884,  src:"TT + IG (YT missing)"}] },
+  { name:"Scott Donnell",    kpis:[{lbl:"Views",        goal:25e6,  curr:6566619,   src:"All platforms"}] },
   { name:"Vince Pitstick",   kpis:[
-    {lbl:"Views",            goal:10e6,  curr:1042898,  src:"TT + IG (YT missing)"},
-    {lbl:"New Followers",    goal:28000, curr:2358,    src:"IG + TT gained"}
+    {lbl:"Views",            goal:10e6,  curr:1759063,  src:"All platforms"},
+    {lbl:"New Followers",    goal:28000, curr:2443,     src:"IG + TT gained"}
   ]},
-  { name:"Zach Schoose",     kpis:[{lbl:"Views",        goal:25e6,  curr:2822570,  src:"IG only"}] }
+  { name:"Zach Schoose",     kpis:[{lbl:"Views",        goal:25e6,  curr:8027239,   src:"All platforms"}] }
 ];
 
 function fmtG(n){
