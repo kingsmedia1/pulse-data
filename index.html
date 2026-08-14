@@ -213,7 +213,7 @@
   </section>
 
   <section id="kpiGoalsSection">
-    <h2 class="stitle">30-Day KPI Goals <span style="font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0;margin-left:8px">Jun 22 – Jul 22, 2026</span></h2>
+    <h2 class="stitle">Monthly KPI Goals <span style="font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0;margin-left:8px">August 2026 · pace-adjusted</span></h2>
     <p class="snote">Team sprint goals tracked against live Vista Social data. The faint line on each bar marks the 43% pace threshold — where the fill should reach today to stay on track.</p>
     <div class="gpace-strip">
       <span class="gpace-lbl">Period Progress</span>
@@ -356,27 +356,22 @@ function esc(s){ return String(s==null?"":s).replace(/[&<>]/g,c=>({"&":"&amp;","
 function escAttr(s){ return String(s==null?"":s).replace(/"/g,"&quot;"); }
 
 // ── KPI Goals ──────────────────────────────────────────────────────────────
-const KPI_PACE = 30/30;
+const KPI_PACE = 13/31;
 const KPI_GOALS = [
-  { name:"Chad Campbell",    kpis:[{lbl:"Views",        goal:8e6,   curr:1040322,   src:"All platforms"}] },
-  { name:"Chad Staples",     kpis:[{lbl:"Views",        goal:10e6,  curr:28513910,  src:"All platforms"}] },
-  { name:"Gary Cucchi",      kpis:[{lbl:"Views",        goal:5e6,   curr:1184368,   src:"All platforms"}] },
-  { name:"Jerremy Newsome",  kpis:[{lbl:"Views",        goal:10e6,  curr:4622239,   src:"All platforms"}] },
-  { name:"John Corcorran",   kpis:[{lbl:"Views",        goal:7e6,   curr:548656,    src:"All platforms"}] },
-  { name:"Mardy Cobb",       kpis:[{lbl:"Views",        goal:5e6,   curr:903938,    src:"All platforms"}] },
-  { name:"Pirtle Farms",     kpis:[{lbl:"Views",        goal:10e6,  curr:3602568,   src:"All platforms"}] },
-  { name:"Remy Davenport",   kpis:[{lbl:"Views",        goal:20e6,  curr:43097289,  src:"All platforms"}] },
-  { name:"Michael Rutkowski",kpis:[
-    {lbl:"Views",            goal:6e6,   curr:1103700,  src:"All platforms"},
-    {lbl:"IG Followers",     goal:3000,  curr:658,      src:"Current total"},
-    {lbl:"TT Followers",     goal:3000,  curr:287,      src:"Current total"}
-  ]},
-  { name:"Scott Donnell",    kpis:[{lbl:"Views",        goal:25e6,  curr:11226974,  src:"All platforms"}] },
-  { name:"Vince Pitstick",   kpis:[
-    {lbl:"Views",            goal:10e6,  curr:4845481,  src:"All platforms"},
-    {lbl:"New Followers",    goal:28000, curr:5619,     src:"IG + TT gained"}
-  ]},
-  { name:"Zach Schoose",     kpis:[{lbl:"Views",        goal:25e6,  curr:11618744,  src:"All platforms"}] }
+  { name:"Chad Campbell",    kpis:[{lbl:"Views", goal:10e6, curr:2187391, src:"All platforms"}] },
+  { name:"Chad Staples",     kpis:[{lbl:"Views", goal:40e6, curr:4727243, src:"All platforms"}] },
+  { name:"Chris Young",      kpis:[{lbl:"Views", goal:3e6,  curr:347198,  src:"All platforms"}] },
+  { name:"Gary Cucchi",      kpis:[{lbl:"Views", goal:5e6,  curr:279115,  src:"All platforms"}] },
+  { name:"Jerremy Newsome",  kpis:[{lbl:"Views", goal:15e6, curr:1535145, src:"All platforms"}] },
+  { name:"John Corcorran",   kpis:[{lbl:"Views", goal:5e6,  curr:167974,  src:"All platforms"}] },
+  { name:"Mardy Cobb",       kpis:[{lbl:"Views", goal:5e6,  curr:377228,  src:"All platforms"}] },
+  { name:"Michael Rutkowski",kpis:[{lbl:"Views", goal:7e6,  curr:686740,  src:"All platforms"}] },
+  { name:"Pirtle Farms",     kpis:[{lbl:"Views", goal:15e6, curr:2002930, src:"All platforms"}] },
+  { name:"Remy Davenport",   kpis:[{lbl:"Views", goal:40e6, curr:7959172, src:"All platforms"}] },
+  { name:"Rich Kenny",       kpis:[{lbl:"Views", goal:3e6,  curr:235796,  src:"All platforms"}] },
+  { name:"Scott Donnell",    kpis:[{lbl:"Views", goal:30e6, curr:3703864, src:"All platforms"}] },
+  { name:"Vince Pitstick",   kpis:[{lbl:"Views", goal:20e6, curr:2573569, src:"All platforms"}] },
+  { name:"Zach Schoose",     kpis:[{lbl:"Views", goal:20e6, curr:1462531, src:"All platforms"}] }
 ];
 
 function fmtG(n){
